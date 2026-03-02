@@ -1,13 +1,13 @@
 # Node modules
-server/node_modules/
-client/node_modules/
+/frontend/node_modules/
+/backend/node_modules/
 
 # Environment files
-server/.env
-client/.env
+/frontend/.env
+/backend/.env
 
 # Build files
-client/dist
+/frontend/dist
 
 # Logs
 *.log
