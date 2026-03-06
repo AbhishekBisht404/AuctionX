@@ -4,7 +4,8 @@ const cors = require('cors');
 const dotenv=require('dotenv').config();
 const authRoutes=require('./routes/authRoutes');
 const userRoutes=require('./routes/userRoutes');
-
+const auctionRoutes = require('./routes/auctionRoutes');
+const bidRoutes = require('./routes/bidRoutes');
 
 const app = express();
 
@@ -27,6 +28,8 @@ mongoose.connect(MONGO_URI)
   // Routes
   app.use('/api/auth',authRoutes);
   app.use('/api/users',userRoutes);
-
+  app.use('/api/auth', authRoutes);
+  app.use('/api/auctions', auctionRoutes);
+  app.use('/api/bids', bidRoutes);
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

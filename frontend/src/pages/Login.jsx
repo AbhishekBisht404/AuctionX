@@ -37,11 +37,16 @@ export default function Login() {
     }
 
     try {
-      
-       const res = await api.post('/auth/login', { email: formData.email, password: formData.password, role: formData.role });
-     
-      
+      const res = await api.post('/auth/login', { 
+        email: formData.email, 
+        password: formData.password, 
+        role: formData.role 
+      });
+    
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('role', res.data.role);
+      localStorage.setItem('username', res.data.username);
+      
       console.log('Login successful, token stored:', res.data.token);
       navigate('/dashboard');
     } catch (err) {
