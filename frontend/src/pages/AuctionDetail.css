@@ -1,0 +1,116 @@
+/* Auction detail page – vanilla CSS, semantic, responsive */
+
+.auction-detail-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.auction-detail-page__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-skyblue);
+}
+
+.auction-detail-page__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-golden);
+}
+
+.auction-detail-page__nav {
+  font-size: 0.9375rem;
+}
+
+.auction-detail-page__nav a {
+  color: var(--color-skyblue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auction-detail-page__nav a:hover {
+  color: var(--color-pink);
+  text-decoration: underline;
+}
+
+.auction-detail-page__nav span {
+  color: var(--color-skyblue);
+  margin: 0 0.25rem;
+  opacity: 0.8;
+}
+
+.auction-detail-page__article {
+  flex: 1;
+  max-width: 48rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.auction-detail-page__article h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-golden);
+}
+
+.auction-detail-page__article p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-skyblue);
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .auction-detail-page {
+    padding: 1rem;
+  }
+
+  .auction-detail-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .auction-detail-page__title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .auction-detail-page__header {
+    border-bottom-color: var(--color-darkblue);
+  }
+
+  .auction-detail-page__title {
+    color: var(--color-darkblue);
+  }
+
+  .auction-detail-page__nav a {
+    color: var(--color-darkblue);
+  }
+
+  .auction-detail-page__nav a:hover {
+    color: var(--color-orange);
+  }
+
+  .auction-detail-page__nav span {
+    color: var(--color-darkblue);
+    opacity: 0.7;
+  }
+
+  .auction-detail-page__article h2 {
+    color: var(--color-darkblue);
+  }
+
+  .auction-detail-page__article p {
+    color: var(--color-darkblue);
+    opacity: 0.9;
+  }
+}

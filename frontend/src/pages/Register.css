@@ -1,0 +1,291 @@
+/* Register (Sign up) page – vanilla CSS, semantic, responsive */
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.register-page__container {
+  width: 100%;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.register-page__card {
+  background: rgba(44, 61, 115, 0.95);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  border: 2px solid var(--color-skyblue);
+}
+
+.register-page__header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.register-page__title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-golden);
+}
+
+.register-page__subtitle {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-skyblue);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.register-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.register-form__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-golden);
+}
+
+.register-form__label--required::after {
+  content: " *";
+  color: var(--color-orange);
+}
+
+.register-form__input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-darkblue);
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid var(--color-skyblue);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.register-form__input::placeholder {
+  color: #5a6a8a;
+}
+
+.register-form__input:focus {
+  outline: none;
+  border-color: var(--color-golden);
+  box-shadow: 0 0 0 3px rgba(255, 211, 114, 0.3);
+}
+
+.register-form__input:focus-visible {
+  outline: 2px solid var(--color-golden);
+  outline-offset: 2px;
+}
+
+.register-form__roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.register-form__role-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(124, 170, 220, 0.15);
+  border: 2px solid var(--color-skyblue);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.register-form__role-option:hover {
+  border-color: var(--color-golden);
+  background: rgba(255, 211, 114, 0.15);
+}
+
+.register-form__role-option--selected,
+.register-form__role-option:has(input:checked) {
+  border-color: var(--color-golden);
+  background: rgba(255, 211, 114, 0.25);
+}
+
+.register-form__role-option input {
+  margin: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  accent-color: var(--color-orange);
+  cursor: pointer;
+}
+
+.register-form__role-option span {
+  font-size: 0.9375rem;
+  color: var(--color-golden);
+}
+
+.register-form__role-option small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-skyblue);
+  margin-top: 0.125rem;
+}
+
+.register-form__submit {
+  margin-top: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-orange);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.register-form__submit:hover {
+  background: #d94a32;
+}
+
+.register-form__submit:active {
+  transform: scale(0.99);
+}
+
+.register-form__submit:focus-visible {
+  outline: 2px solid var(--color-golden);
+  outline-offset: 2px;
+}
+
+.register-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.register-page__footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--color-skyblue);
+}
+
+.register-page__footer a {
+  color: var(--color-golden);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-page__footer a:hover {
+  text-decoration: underline;
+  color: var(--color-pink);
+}
+
+.register-form__message {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.register-form__message--error {
+  background: rgba(241, 91, 66, 0.2);
+  border: 2px solid var(--color-orange);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .register-page {
+    padding: 1rem;
+    align-items: stretch;
+  }
+
+  .register-page__card {
+    padding: 1.5rem;
+  }
+
+  .register-page__title {
+    font-size: 1.25rem;
+  }
+
+  .register-form__role-option {
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .register-page__card {
+    background: #fff;
+    border-color: var(--color-darkblue);
+    box-shadow: 0 4px 24px rgba(44, 61, 115, 0.15);
+  }
+
+  .register-page__title {
+    color: var(--color-darkblue);
+  }
+
+  .register-page__subtitle {
+    color: var(--color-skyblue);
+  }
+
+  .register-form__label {
+    color: var(--color-darkblue);
+  }
+
+  .register-form__input {
+    color: var(--color-darkblue);
+    background: #f5f7fc;
+    border-color: var(--color-skyblue);
+  }
+
+  .register-form__role-option {
+    background: rgba(124, 170, 220, 0.08);
+    border-color: var(--color-skyblue);
+  }
+
+  .register-form__role-option:hover {
+    background: rgba(255, 211, 114, 0.15);
+  }
+
+  .register-form__role-option--selected,
+  .register-form__role-option:has(input:checked) {
+    background: rgba(255, 211, 114, 0.2);
+    border-color: var(--color-orange);
+  }
+
+  .register-form__role-option span {
+    color: var(--color-darkblue);
+  }
+
+  .register-form__role-option small {
+    color: #5a6a8a;
+  }
+
+  .register-page__footer {
+    color: var(--color-darkblue);
+  }
+
+  .register-page__footer a {
+    color: var(--color-orange);
+  }
+
+  .register-page__footer a:hover {
+    color: var(--color-pink);
+  }
+
+  .register-form__message--error {
+    color: var(--color-darkblue);
+    background: rgba(241, 91, 66, 0.12);
+  }
+}
