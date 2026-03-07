@@ -31,5 +31,6 @@ mongoose.connect(MONGO_URI)
   app.use('/api/auth', authRoutes);
   app.use('/api/auctions', auctionRoutes);
   app.use('/api/bids', bidRoutes);
+  app.use('/uploads', express.static('uploads'));
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

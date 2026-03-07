@@ -102,8 +102,9 @@
   .role-badge {
     color: var(--color-skyblue);
   }
+  
   .nav-item {
-    color: var(--color-skyblue);
+    color: #444444; 
   }
   .nav-item:hover {
     color: var(--color-darkblue);
@@ -113,12 +114,14 @@
     border-left-color: var(--color-orange);
     background-color: rgba(124, 170, 220, 0.1);
   }
+
   .sidebar-footer {
     border-top-color: var(--color-skyblue);
   }
+
   .logout-btn {
-    color: var(--color-skyblue);
-    border-color: var(--color-skyblue);
+    color: #444444; 
+    border-color: #cccccc; 
   }
   .logout-btn:hover {
     border-color: var(--color-orange);
