@@ -9,6 +9,8 @@ import { jwtDecode } from "jwt-decode";
 
   if (decoded.exp * 1000 < Date.now()) {
     localStorage.removeItem("token");
+    localStorage.removeItem('role');
+    localStorage.removeItem('username');
     return false;
   }
 

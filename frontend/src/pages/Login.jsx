@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import api from '../services/api';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+
 
 const ROLES = [
   { value: 'admin', label: 'Admin', description: 'Platform administration' },
@@ -18,6 +21,7 @@ export default function Login() {
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -109,19 +113,30 @@ export default function Login() {
               <label htmlFor="login-password" className="login-form__label login-form__label--required">
                 Password
               </label>
-              <input
-                id="login-password"
-                type="password"
-                name="password"
-                className="login-form__input"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="••••••••"
-                autoComplete="current-password"
-                required
-                disabled={isSubmitting}
-                aria-invalid={!!error}
-              />
+              <div className="input-container">
+                <input
+                  id="login-password"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  className="login-form__input"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  autoComplete="current-password"
+                  required
+                  disabled={isSubmitting}
+                  aria-invalid={!!error}
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  disabled={isSubmitting}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
 
             <fieldset className="login-form__group">

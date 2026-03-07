@@ -1,0 +1,136 @@
+/* Seller dashboard – 5 color variables only */
+
+.dashboard-stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dashboard-card {
+  background: #3d4d80;
+  border: 1px solid var(--color-skyblue);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.card-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--color-skyblue);
+}
+
+.card-header.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-golden);
+}
+
+.primary-btn {
+  display: inline-block;
+  background: var(--color-orange);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.primary-btn:hover {
+  background: var(--color-pink);
+}
+
+.data-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 1rem 2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-skyblue);
+}
+
+.data-table th {
+  font-weight: 500;
+  color: var(--color-skyblue);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(124, 170, 220, 0.12);
+}
+
+.data-table td {
+  font-size: 0.95rem;
+  color: var(--color-golden);
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.active {
+  background: rgba(255, 211, 114, 0.35);
+  color: var(--color-darkblue);
+}
+
+.empty-state,
+.state-text {
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--color-skyblue);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  .dashboard-card {
+    background: #ffffff;
+    border-color: var(--color-skyblue);
+  }
+  .card-header {
+    border-bottom-color: var(--color-skyblue);
+  }
+  .card-header h3 {
+    color: var(--color-darkblue);
+  }
+  .data-table th,
+  .data-table td {
+    border-bottom-color: var(--color-skyblue);
+  }
+  .data-table th {
+    color: var(--color-skyblue);
+  }
+  .data-table td {
+    color: var(--color-darkblue);
+  }
+  .status-badge.active {
+    color: var(--color-darkblue);
+  }
+  .empty-state,
+  .state-text {
+    color: var(--color-skyblue);
+  }
+}

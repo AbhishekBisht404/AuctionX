@@ -1,19 +1,18 @@
-/* AuctionX – color scheme */
+/* AuctionX – 5 color variables only */
+
 :root {
   --color-golden: #FFD372;
   --color-orange: #F15B42;
   --color-pink: #F49CC4;
   --color-darkblue: #2C3D73;
-  --color-skyblue: #7CAADC;
+  --color-skyblue: #ffff;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: var(--color-golden);
   background-color: var(--color-darkblue);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -65,7 +64,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--color-darkblue);
-    background-color: #f5f7fc;
+    background-color: #f0f4fc;
   }
   a {
     color: var(--color-darkblue);

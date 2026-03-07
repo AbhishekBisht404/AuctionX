@@ -1,10 +1,6 @@
+/* Manage Users – same layout as BrowseMarket */
 
-
-:root {
-  --sidebar-width: 250px;
-}
-
-.dashboard-layout {
+.manage-users-layout {
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -12,36 +8,50 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.dashboard-main {
-  flex-grow: 1;
+.manage-users-main {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--color-darkblue);
   color: var(--color-golden);
 }
 
-.dashboard-canvas {
+.manage-users-canvas {
   padding: 2.5rem;
-  width: 100%;
   box-sizing: border-box;
 }
 
-.dashboard-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+.manage-users-canvas h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-golden);
+}
+
+.manage-users-canvas p {
+  margin: 0;
   font-size: 1rem;
+  line-height: 1.6;
   color: var(--color-skyblue);
 }
 
 @media (prefers-color-scheme: light) {
-  .dashboard-main {
+  .manage-users-main {
     background-color: #f0f4fc;
     color: var(--color-darkblue);
   }
-  .dashboard-loading {
+  .manage-users-canvas h2 {
+    color: var(--color-darkblue);
+  }
+  .manage-users-canvas p {
     color: var(--color-skyblue);
+  }
+}
+
+@media (max-width: 600px) {
+  .manage-users-layout {
+    flex-direction: column;
   }
 }

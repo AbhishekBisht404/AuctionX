@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 import api from '../services/api';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const ROLES = [
   { value: 'bidder', label: 'Bidder', description: 'Place bids on auctions' },
@@ -19,6 +21,8 @@ export default function Register() {
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -133,39 +137,61 @@ export default function Register() {
               <label htmlFor="register-password" className="register-form__label register-form__label--required">
                 Password
               </label>
-              <input
-                id="register-password"
-                type="password"
-                name="password"
-                className="register-form__input"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="At least 6 characters"
-                autoComplete="new-password"
-                required
-                minLength={6}
-                disabled={isSubmitting}
-                aria-invalid={!!error}
-              />
+              <div className="input-container">
+                <input
+                  id="register-password"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  className="register-form__input"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="At least 6 characters"
+                  autoComplete="new-password"
+                  required
+                  minLength={6}
+                  disabled={isSubmitting}
+                  aria-invalid={!!error}
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  disabled={isSubmitting}
+                >
+                 {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
 
             <div className="register-form__group">
               <label htmlFor="register-confirmPassword" className="register-form__label register-form__label--required">
                 Confirm password
               </label>
-              <input
-                id="register-confirmPassword"
-                type="password"
-                name="confirmPassword"
-                className="register-form__input"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="Repeat password"
-                autoComplete="new-password"
-                required
-                disabled={isSubmitting}
-                aria-invalid={!!error}
-              />
+              <div className="input-container">
+                <input
+                  id="register-confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  name="confirmPassword"
+                  className="register-form__input"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Repeat password"
+                  autoComplete="new-password"
+                  required
+                  disabled={isSubmitting}
+                  aria-invalid={!!error}
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  disabled={isSubmitting}
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
 
             <fieldset className="register-form__group">

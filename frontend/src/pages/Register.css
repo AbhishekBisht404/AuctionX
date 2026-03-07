@@ -67,7 +67,7 @@
 
 .register-form__input {
   width: 100%;
-  padding: 0.625rem 0.875rem;
+  padding: 0.625rem 2.5rem 0.625rem 0.875rem;
   font-size: 1rem;
   font-family: inherit;
   color: var(--color-darkblue);
@@ -288,4 +288,37 @@
     color: var(--color-darkblue);
     background: rgba(241, 91, 66, 0.12);
   }
+}
+
+.input-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-darkblue);
+  font-size: 1rem;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.password-toggle:hover {
+  color: black;
+  background: none;
+}
+
+.password-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
