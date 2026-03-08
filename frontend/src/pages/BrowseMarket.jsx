@@ -3,13 +3,24 @@ import api from '../services/api';
 import Sidebar from './Sidebar'; 
 import Topbar from './Topbar';
 import { Link } from 'react-router-dom';
-import './Home.css'; 
+import './Home.css';
+import './BrowseMarket.css';
+import isTokenValid from '../services/tokenvalidity';
+import { useNavigate } from 'react-router-dom';
 
 export default function BrowseMarket() {
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(true);
+const navigate=useNavigate();
 
   useEffect(() => {
+
+    if(!isTokenValid()){
+navigate('/');
+return;
+    }
+
+
     const fetchMarket = async () => {
       try {
         const res = await api.get('/auctions/all');

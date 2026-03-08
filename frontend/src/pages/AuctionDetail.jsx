@@ -5,9 +5,19 @@ import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import './Home.css'; 
 import './Dashboard.css';
+import isTokenValid from '../services/tokenvalidity';
+import { useNavigate } from 'react-router-dom';
 
 export default function AuctionDetail() {
+  const navigate = useNavigate();
+    useEffect(() => {
+      if (!isTokenValid()) {
+        navigate('/');
+        return;
+      }
+    }, []);
   const { id } = useParams();
+  const storedRole = localStorage.getItem('role');
   const [auction, setAuction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [bidAmount, setBidAmount] = useState('');
@@ -19,6 +29,7 @@ export default function AuctionDetail() {
       try {
         const res = await api.get(`/auctions/${id}`);
         setAuction(res.data);
+    
       } catch (err) {
         console.error("Failed to fetch auction details", err);
       } finally {
@@ -84,7 +95,7 @@ export default function AuctionDetail() {
 
                 <hr className="divider" />
 
-                {token ? (
+                {token && storedRole === 'bidder' ? (
                   <div className="bid-input-area">
                     <label>Place Your Bid</label>
                     <div className="input-group">
@@ -101,7 +112,7 @@ export default function AuctionDetail() {
                 ) : (
                   <div className="guest-cta-box">
                     <p>Sign in to join the bidding for this item.</p>
-                    <Link to="/login" className="bid-button block-btn">Sign In to Bid</Link>
+                    <Link to="/login" className="bid-button block-btn">SignIn/SignUp to Bid</Link>
                   </div>
                 )}
               </div>

@@ -1,4 +1,5 @@
 const Auction = require('../models/Auction');
+const Bid = require('../models/Bid');
 const mongoose = require('mongoose');
 
 exports.getMyListings = async (req, res) => {
@@ -84,5 +85,33 @@ exports.getAuctionById = async (req, res) => {
     res.status(200).json(auction);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+exports.getAllAuctionsAdmin = async (req, res) => {
+  try {
+    const auctions = await Auction.find({})
+      .populate('owner', 'username email')
+      .sort({ createdAt: -1 });
+    res.status(200).json(auctions);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching auctions", error: error.message });
+  }
+};
+
+exports.deleteAuction = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid auction ID' });
+    }
+    await Bid.deleteMany({ auction: id });
+    const deletedAuction = await Auction.findByIdAndDelete(id);
+    if (!deletedAuction) {
+      return res.status(404).json({ message: 'Auction not found' });
+    }
+    res.status(200).json({ message: 'Auction and associated bids deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error deleting auction', error: error.message });
   }
 };

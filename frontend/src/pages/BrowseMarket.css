@@ -1,4 +1,19 @@
+/* Image size limits to prevent overflow */
+.item-image-wrapper {
+  width: 100%;
+  max-height: 240px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);
+}
 
+.item-image-wrapper img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 240px;
+  object-fit: cover;
+  display: block;
+}
 
 .browse-market-layout {
   display: flex;

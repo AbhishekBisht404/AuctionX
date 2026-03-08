@@ -51,7 +51,7 @@ export default function Login() {
       localStorage.setItem('role', res.data.role);
       localStorage.setItem('username', res.data.username);
       
-      console.log('Login successful, token stored:', res.data.token);
+      console.log('Login successful, token stored:');
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
