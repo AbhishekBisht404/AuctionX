@@ -5,31 +5,22 @@ import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import './Home.css'; 
 import './Dashboard.css';
-import isTokenValid from '../services/tokenvalidity';
-import { useNavigate } from 'react-router-dom';
 
 export default function AuctionDetail() {
-  const navigate = useNavigate();
-    useEffect(() => {
-      if (!isTokenValid()) {
-        navigate('/');
-        return;
-      }
-    }, []);
   const { id } = useParams();
-  const storedRole = localStorage.getItem('role');
   const [auction, setAuction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [bidAmount, setBidAmount] = useState('');
   
   const token = localStorage.getItem('token');
+  const userRole = localStorage.getItem('role');
+  const currentUserId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchAuction = async () => {
       try {
         const res = await api.get(`/auctions/${id}`);
         setAuction(res.data);
-    
       } catch (err) {
         console.error("Failed to fetch auction details", err);
       } finally {
@@ -39,12 +30,14 @@ export default function AuctionDetail() {
     fetchAuction();
   }, [id]);
 
-  if (loading) return <div className="loading-screen">Curating details...</div>;
+  if (loading) return <div className="loading-screen">Verifying auction data...</div>;
   if (!auction) return <div className="error-screen">Auction not found.</div>;
+
+  const isOwner = auction.owner?._id === currentUserId;
+  const isSeller = userRole === 'seller';
 
   return (
     <div className={token ? "dashboard-layout" : "public-site-wrapper"}>
-      
       {token ? <Sidebar /> : (
         <nav className="public-nav">
           <div className="nav-container">
@@ -64,10 +57,7 @@ export default function AuctionDetail() {
           <div className="detail-wrapper">
             
             <div className="detail-image-box">
-              <img 
-                src={auction.image ? `http://localhost:5000${auction.image}` : '/placeholder.jpg'} 
-                alt={auction.title} 
-              />
+              <img src={auction.image ? `http://localhost:5000${auction.image}` : '/placeholder.jpg'} alt={auction.title} />
               <div className="detail-status-tag">{auction.status}</div>
             </div>
 
@@ -83,36 +73,41 @@ export default function AuctionDetail() {
                 </div>
 
                 <div className="info-grid">
-                  <div className="info-item">
-                    <span>Min. Increment</span>
-                    <strong>+${auction.minIncrement}</strong>
-                  </div>
-                  <div className="info-item">
-                    <span>Ends On</span>
-                    <strong>{new Date(auction.endTime).toLocaleDateString()}</strong>
-                  </div>
+                  <div className="info-item"><span>Increment</span><strong>+${auction.minIncrement}</strong></div>
+                  <div className="info-item"><span>Ends</span><strong>{new Date(auction.endTime).toLocaleDateString()}</strong></div>
                 </div>
 
                 <hr className="divider" />
 
-                {token && storedRole === 'bidder' ? (
+                {/* --- ROLE BASED ACTION PANEL --- */}
+                {!token ? (
+                  <div className="guest-cta-box">
+                    <p>Sign in to join the bidding.</p>
+                    <Link to="/login" className="bid-button block-btn">Sign In to Bid</Link>
+                  </div>
+                ) : isOwner ? (
+                  <div className="seller-notice-box">
+                    <p>This is your listing.</p>
+                    <small>Owners cannot bid on their own auctions.</small>
+                  </div>
+                ) : isSeller ? (
+                  <div className="seller-notice-box">
+                    <p>Seller Account Restricted</p>
+                    <small>Sellers are not permitted to bid. Please use a Buyer account.</small>
+                  </div>
+                ) : (
                   <div className="bid-input-area">
                     <label>Place Your Bid</label>
                     <div className="input-group">
                       <input 
                         type="number" 
-                        placeholder={`Min. $${auction.currentBid + auction.minIncrement}`}
+                        placeholder={`Min $${auction.currentBid + auction.minIncrement}`}
                         value={bidAmount}
                         onChange={(e) => setBidAmount(e.target.value)}
                         className="bid-field"
                       />
                       <button className="bid-button">Place Bid</button>
                     </div>
-                  </div>
-                ) : (
-                  <div className="guest-cta-box">
-                    <p>Sign in to join the bidding for this item.</p>
-                    <Link to="/login" className="bid-button block-btn">SignIn/SignUp to Bid</Link>
                   </div>
                 )}
               </div>
@@ -125,23 +120,8 @@ export default function AuctionDetail() {
             <div className="footer-container">
               <div className="footer-brand-section">
                 <Link to="/" className="brand-logo footer-logo">AUCTION<span>X</span></Link>
-                <p className="footer-tagline">The world's premier destination for rare collectibles.</p>
+                <p>The world's premier destination for rare collectibles.</p>
               </div>
-              <div className="footer-links-grid">
-                <div className="footer-column">
-                  <h4>Marketplace</h4>
-                  <Link to="/">Explore</Link>
-                  <Link to="/register">Sell</Link>
-                </div>
-                <div className="footer-column">
-                  <h4>Support</h4>
-                  <Link to="/">Help Center</Link>
-                  <Link to="/">Terms</Link>
-                </div>
-              </div>
-            </div>
-            <div className="footer-bottom">
-              <p>&copy; 2026 AUCTIONX. All Rights Reserved.</p>
             </div>
           </footer>
         )}
