@@ -1,10 +1,22 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import './Dashboard.css'; 
+import './CreateAuctions.css';
+import isTokenValid from '../services/tokenvalidity';
+
 
 export default function CreateAuction() {
   const navigate = useNavigate();
+  useState(() => {
+    if (!isTokenValid()) {
+      navigate('/');
+      return;
+    }
+    if(localStorage.getItem('role') !== 'seller') {
+      navigate('/dashboard');
+      return;
+    }
+  }, []);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -52,7 +64,6 @@ export default function CreateAuction() {
 
   return (
     <div className="dashboard-layout">
-      
       <main className="dashboard-main">
         <header className="dashboard-topbar">
           <h1 className="topbar-title">Create New Listing</h1>
@@ -64,53 +75,118 @@ export default function CreateAuction() {
               <div className="card-header">
                 <h3>Item Details</h3>
               </div>
-              
-              <form onSubmit={handleSubmit} className="data-table-wrapper" style={{ padding: '2rem' }}>
-                {error && <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>}
-                
-                <div style={{ display: 'grid', gap: '1.5rem' }}>
-                  <div className="form-group">
-                    <label className="font-medium">Item Title</label>
-                    <input type="text" name="title" className="logout-btn" style={{ textAlign: 'left', color: 'black', marginTop: '0.5rem' }} onChange={handleChange} required />
+
+              <form onSubmit={handleSubmit} className="create-auction-form">
+                {error && <p className="create-auction-error">{error}</p>}
+
+                <div className="create-auction-fields">
+                  <div className="create-auction-field">
+                    <label className="font-medium" htmlFor="title">
+                      Item Title
+                    </label>
+                    <input
+                      id="title"
+                      type="text"
+                      name="title"
+                      className="create-auction-input"
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
 
-                  <div className="form-group">
-                    <label className="font-medium">Description</label>
-                    <textarea name="description" className="logout-btn" style={{ textAlign: 'left', color: 'black', marginTop: '0.5rem', minHeight: '100px' }} onChange={handleChange} required />
+                  <div className="create-auction-field">
+                    <label className="font-medium" htmlFor="description">
+                      Description
+                    </label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      className="create-auction-textarea"
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                    <div>
-                      <label className="font-medium">Starting Price ($)</label>
-                      <input type="number" name="startingPrice" className="logout-btn" style={{ textAlign: 'left', color: 'black' }} onChange={handleChange} required />
+                  <div className="create-auction-row">
+                    <div className="create-auction-field">
+                      <label className="font-medium" htmlFor="startingPrice">
+                        Starting Price ($)
+                      </label>
+                      <input
+                        id="startingPrice"
+                        type="number"
+                        name="startingPrice"
+                        className="create-auction-input"
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
-                    <div>
-                      <label className="font-medium">Min Increment ($)</label>
-                      <input type="number" name="minIncrement" className="logout-btn" style={{ textAlign: 'left', color: 'black' }} onChange={handleChange} required />
+                    <div className="create-auction-field">
+                      <label className="font-medium" htmlFor="minIncrement">
+                        Min Increment ($)
+                      </label>
+                      <input
+                        id="minIncrement"
+                        type="number"
+                        name="minIncrement"
+                        className="create-auction-input"
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                    <div>
-                      <label className="font-medium">Start Date & Time</label>
-                      <input type="datetime-local" name="startTime" className="logout-btn" onChange={handleChange} required />
+                  <div className="create-auction-row">
+                    <div className="create-auction-field">
+                      <label className="font-medium" htmlFor="startTime">
+                        Start Date &amp; Time
+                      </label>
+                      <input
+                        id="startTime"
+                        type="datetime-local"
+                        name="startTime"
+                        className="create-auction-input"
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
-                    <div>
-                      <label className="font-medium">End Date & Time</label>
-                      <input type="datetime-local" name="endTime" className="logout-btn" onChange={handleChange} required />
+                    <div className="create-auction-field">
+                      <label className="font-medium" htmlFor="endTime">
+                        End Date &amp; Time
+                      </label>
+                      <input
+                        id="endTime"
+                        type="datetime-local"
+                        name="endTime"
+                        className="create-auction-input"
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
                   </div>
 
-                  <div className="form-group">
-                    <label className="font-medium">Item Image</label>
-                    <input type="file" accept="image/*" onChange={handleImageChange} className="logout-btn" style={{ border: 'none' }} />
+                  <div className="create-auction-field">
+                    <label className="font-medium" htmlFor="itemImage">
+                      Item Image
+                    </label>
+                    <input
+                      id="itemImage"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="create-auction-file-input"
+                    />
                   </div>
 
-                  <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                  <div className="create-auction-actions">
                     <button type="submit" className="primary-btn" disabled={isSubmitting}>
                       {isSubmitting ? 'Publishing...' : 'Confirm & List Item'}
                     </button>
-                    <button type="button" onClick={() => navigate('/dashboard')} className="logout-btn" style={{ width: 'auto' }}>
+                    <button
+                      type="button"
+                      onClick={() => navigate('/dashboard')}
+                      className="create-auction-cancel-btn"
+                    >
                       Cancel
                     </button>
                   </div>
