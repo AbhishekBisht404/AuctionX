@@ -10,12 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AuctionDetail() {
   const navigate = useNavigate();
-    useEffect(() => {
-      if (!isTokenValid()) {
-        navigate('/');
-        return;
-      }
-    }, []);
+   
   const { id } = useParams();
   const storedRole = localStorage.getItem('role');
   const [auction, setAuction] = useState(null);
