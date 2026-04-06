@@ -4,6 +4,10 @@ import api from '../services/api';
 import './Home.css';
 
 export default function Home() {
+  useEffect(() => {
+  console.log("Home Page Mounted");
+  return () => console.log("Home Page Unmounted - Navigating away!");
+}, []);
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(true);
 

@@ -229,3 +229,26 @@
     color: var(--color-darkblue);
   }
 }
+
+
+.seller-notice-box {
+  background: #fff8e1; 
+  border: 1px solid #ffe082;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.seller-notice-box p {
+  color: #795548;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.seller-notice-box small {
+  color: #8d6e63;
+  display: block;
+  margin-top: 5px;
+}

@@ -4,27 +4,28 @@ import api from '../services/api';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import './Dashboard.css';
-import './AuctionDetail.css';
-import isTokenValid from '../services/tokenvalidity';
-import { useNavigate } from 'react-router-dom';
+import './Home.css'; 
 
 export default function AuctionDetail() {
-  const navigate = useNavigate();
-   
   const { id } = useParams();
+  
+  // User context from localStorage
+  const token = localStorage.getItem('token');
   const storedRole = localStorage.getItem('role');
+  const currentUserId = localStorage.getItem('userId');
+
   const [auction, setAuction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [bidAmount, setBidAmount] = useState('');
-  
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
+    // FIX 1: Always start at the top when navigating from Home
+    window.scrollTo(0, 0);
+
     const fetchAuction = async () => {
       try {
         const res = await api.get(`/auctions/${id}`);
         setAuction(res.data);
-    
       } catch (err) {
         console.error("Failed to fetch auction details", err);
       } finally {
@@ -37,9 +38,15 @@ export default function AuctionDetail() {
   if (loading) return <div className="loading-screen">Curating details...</div>;
   if (!auction) return <div className="error-screen">Auction not found.</div>;
 
+  // Logic Checks
+  const isOwner = auction.owner?._id === currentUserId;
+  const isSeller = storedRole === 'seller';
+  const isBidder = storedRole === 'bidder';
+
   return (
     <div className={token ? "dashboard-layout" : "public-site-wrapper"}>
       
+      {/* 1. NAVIGATION */}
       {token ? <Sidebar /> : (
         <nav className="public-nav">
           <div className="nav-container">
@@ -58,6 +65,7 @@ export default function AuctionDetail() {
         <div className={token ? "dashboard-canvas" : "public-container"}>
           <div className="detail-wrapper">
             
+            {/* LEFT: IMAGE */}
             <div className="detail-image-box">
               <img 
                 src={auction.image ? `http://localhost:5000${auction.image}` : '/placeholder.jpg'} 
@@ -66,6 +74,7 @@ export default function AuctionDetail() {
               <div className="detail-status-tag">{auction.status}</div>
             </div>
 
+            {/* RIGHT: INFO & BIDDING */}
             <div className="detail-info-box">
               <span className="seller-label">Seller: @{auction.owner?.username}</span>
               <h1 className="item-title">{auction.title}</h1>
@@ -90,7 +99,27 @@ export default function AuctionDetail() {
 
                 <hr className="divider" />
 
-                {token && storedRole === 'bidder' ? (
+                {/* --- DYNAMIC ACTION AREA --- */}
+                {!token ? (
+                  /* STATE 1: GUEST */
+                  <div className="guest-cta-box">
+                    <p>Sign in to join the bidding for this item.</p>
+                    <Link to="/login" className="bid-button block-btn">Sign In to Bid</Link>
+                  </div>
+                ) : isOwner ? (
+                  /* STATE 2: OWNER */
+                  <div className="seller-notice-box">
+                    <p>This is your listing.</p>
+                    <small>Owners are not permitted to bid on their own items.</small>
+                  </div>
+                ) : isSeller ? (
+                  /* STATE 3: OTHER SELLER */
+                  <div className="seller-notice-box">
+                    <p>Seller Account Restricted</p>
+                    <small>Bidding is only available for Buyer/Bidder accounts.</small>
+                  </div>
+                ) : (
+                  /* STATE 4: AUTHORIZED BIDDER */
                   <div className="bid-input-area">
                     <label>Place Your Bid</label>
                     <div className="input-group">
@@ -103,11 +132,7 @@ export default function AuctionDetail() {
                       />
                       <button className="bid-button">Place Bid</button>
                     </div>
-                  </div>
-                ) : (
-                  <div className="guest-cta-box">
-                    <p>Sign in to join the bidding for this item.</p>
-                    <Link to="/login" className="bid-button block-btn">SignIn/SignUp to Bid</Link>
+                    <p className="helper-text">Enter ${auction.currentBid + auction.minIncrement} or more</p>
                   </div>
                 )}
               </div>
@@ -115,6 +140,7 @@ export default function AuctionDetail() {
           </div>
         </div>
 
+        {/* FOOTER: Only for guests */}
         {!token && (
           <footer className="home-footer">
             <div className="footer-container">
@@ -131,7 +157,6 @@ export default function AuctionDetail() {
                 <div className="footer-column">
                   <h4>Support</h4>
                   <Link to="/">Help Center</Link>
-                  <Link to="/">Terms</Link>
                 </div>
               </div>
             </div>
