@@ -8,7 +8,7 @@ import BrowseMarket from './pages/BrowseMarket.jsx';
 import AuctionsManager from './pages/AuctionsManager.jsx';
 import ManageUsers from './pages/ManageUsers.jsx';
 import CreateAuction from './pages/CreateAuction.jsx';
-
+import BidderDashboard from './pages/BidderDashboard.jsx';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route path="/dashboard/manageUsers" element={<ManageUsers />} />
         <Route path="/dashboard/auctionManager" element={<AuctionsManager />} />
         <Route path="/create-auction" element={<CreateAuction />} />
+        <Route path="/bidder-dashboard" element={<BidderDashboard />} />
     </Routes>
   )
 }
