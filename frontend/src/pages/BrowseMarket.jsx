@@ -3,7 +3,7 @@ import api from '../services/api';
 import Sidebar from './Sidebar'; 
 import Topbar from './Topbar';
 import { Link } from 'react-router-dom';
-import './Home.css';
+import './Dashboard.css';
 import './BrowseMarket.css';
 import isTokenValid from '../services/tokenvalidity';
 import { useNavigate } from 'react-router-dom';

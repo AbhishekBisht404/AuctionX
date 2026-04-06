@@ -3,8 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import api from '../services/api';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
-import './Home.css'; 
 import './Dashboard.css';
+import './AuctionDetail.css';
 import isTokenValid from '../services/tokenvalidity';
 import { useNavigate } from 'react-router-dom';
 

@@ -311,11 +311,8 @@
   align-items: center;
   justify-content: center;
   transition: color 0.2s;
+  color:black;
+  border:none;
 }
 
 
-
-.password-toggle:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}

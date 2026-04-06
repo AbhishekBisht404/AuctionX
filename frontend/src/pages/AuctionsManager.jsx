@@ -59,7 +59,7 @@ const AuctionsManager = () => {
   };
 
   const removeAuction = async (auctionId) => {
-    if (!window.confirm('Remove this auction? All associated bids will be deleted.')) return;
+   
     try {
       await api.delete(`/auctions/admin/${auctionId}`);
       setAuctions((prev) => prev.filter((a) => a._id !== auctionId));

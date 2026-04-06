@@ -1,11 +1,11 @@
-/* Auctions Manager – same layout as BrowseMarket */
+
 
 .auctions-manager-layout {
   display: flex;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
 }
 
 .auctions-manager-main {

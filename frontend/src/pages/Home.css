@@ -1,9 +1,4 @@
-:root {
-  --accent: #000000;
-  --text-muted: #666;
-  --border: #eeeeee;
-  --bg-soft: #fafafa;
-}
+
 
 .home-wrapper { font-family: 'Inter', sans-serif; color: #000; }
 
