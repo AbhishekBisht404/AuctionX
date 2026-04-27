@@ -1,9 +1,7 @@
-/* Topbar component – 5 color variables only */
-
 .dashboard-topbar {
   height: 65px;
   background-color: #3d4d80;
-  border-bottom: 1px solid var(--color-skyblue);
+  border-bottom: 1px solid #7CA8DC;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,9 +13,8 @@
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-skyblue);
+  color: #7CA8DC;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .topbar-user {
@@ -29,13 +26,13 @@
 .user-greeting {
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--color-golden);
+  color: #FFD372;
 }
 
 .avatar {
   width: 32px;
   height: 32px;
-  background-color: var(--color-orange);
+  background-color: #F15B42;
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -43,17 +40,4 @@
   justify-content: center;
   font-size: 0.85rem;
   font-weight: 600;
-}
-
-@media (prefers-color-scheme: light) {
-  .dashboard-topbar {
-    background-color: #ffffff;
-    border-bottom-color: var(--color-skyblue);
-  }
-  .topbar-title {
-    color: var(--color-skyblue);
-  }
-  .user-greeting {
-    color: var(--color-darkblue);
-  }
 }

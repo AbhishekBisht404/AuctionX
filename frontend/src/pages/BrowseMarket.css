@@ -1,21 +1,20 @@
-
-
 .market-header {
   margin-bottom: 1.25rem;
 }
 
 .dashboard-page__title {
-  margin: 0 0 0.35rem 0;
+  margin: 0;
+  margin-bottom: 0.35rem;
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--color-golden);
+  color: #FFD372;
 }
 
 .dashboard-page__subtitle {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: var(--color-skyblue);
+  color: #7CA8DC;
 }
 
 .market-grid {
@@ -29,18 +28,17 @@
   text-decoration: none;
   color: inherit;
   background: #3d4d80;
-  border: 1px solid var(--color-skyblue);
+  border: 1px solid #7CA8DC;
   border-radius: 6px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  transition: transform 0.12s ease, border-color 0.12s ease;
 }
 
 .item-card:hover {
   transform: translateY(-2px);
-  border-color: var(--color-golden);
+  border-color: #FFD372;
 }
 
 .item-image-wrapper {
@@ -66,7 +64,7 @@
 
 .item-seller {
   font-size: 0.78rem;
-  color: var(--color-skyblue);
+  color: #7CA8DC;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -76,11 +74,10 @@
   margin: 0;
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--color-golden);
+  color: #FFD372;
   line-height: 1.25;
-  
-  overflow:hidden;
-  text-overflow:ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item-footer {
@@ -94,28 +91,16 @@
 .price-amount {
   font-size: 1.05rem;
   font-weight: 800;
-  color: var(--color-golden);
+  color: #FFD372;
 }
 
 @media (max-width: 520px) {
   .market-grid {
     grid-template-columns: 1fr;
   }
+
   .item-image-wrapper {
     height: 200px;
   }
 }
 
-@media (prefers-color-scheme: light) {
-  .dashboard-page__title {
-    color: var(--color-darkblue);
-  }
-
-  .item-card {
-    background: #ffffff;
-  }
-
-  .item-title {
-    color: var(--color-darkblue);
-  }
-}

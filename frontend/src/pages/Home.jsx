@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
-import './Home.css';
 
 export default function Home() {
-  useEffect(() => {
-  console.log("Home Page Mounted");
-  return () => console.log("Home Page Unmounted - Navigating away!");
-}, []);
+  
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,61 +22,65 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="home-wrapper">
-      <nav className="home-nav">
-        <div className="nav-inner">
-          <Link to="/" className="brand-logo">AUCTION<span>X</span></Link>
-          <div className="nav-actions">
-            <Link to="/login" className="text-link">Sign In</Link>
-            <Link to="/register" className="btn-primary">Get Started</Link>
+    <div className="font-sans text-white bg-[#37477a]">
+      <nav className="sticky top-0 z-[1000] flex h-20 items-center border-b border-[#49698e] bg-[#2C3D73]">
+        <div className="mx-auto flex w-full max-w-[1300px] justify-between px-8">
+          <Link to="/" className="text-2xl font-black tracking-[-1px] no-underline text-white">AUCTION<span className="text-[#888]">X</span></Link>
+          <div className="flex items-center gap-8">
+            <Link to="/login" className="font-medium no-underline text-[#cbd5e1] hover:text-white">Sign In</Link>
+            <Link to="/register" className="rounded border border-white px-8 py-4 font-semibold no-underline text-white transition hover:bg-white/10">Get Started</Link>
           </div>
         </div>
       </nav>
 
-      <header className="hero-banner">
-        <div className="hero-overlay">
-          <div className="hero-content">
-            <span className="hero-tag">Live & Exclusive</span>
-            <h1>Discover & Bid on <br/>Unique Antiques.</h1>
-            <p>The world's premier destination for rare collectibles and historical pieces.</p>
-            <div className="hero-btns">
-              <a href="#explore" className="btn-primary">Explore Market</a>
-              <Link to="/register" className="btn-outline">Start Selling</Link>
+      <header
+        className="h-[70vh] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=2070')" }}
+      >
+        <div className="flex h-full items-center bg-gradient-to-r from-[#37477a]/95 to-transparent px-[10%]">
+          <div className="max-w-[600px]">
+            <span className="text-xs font-bold uppercase tracking-[2px] text-[#888]">Live & Exclusive</span>
+            <h1 className="my-6 text-[clamp(2.2rem,6vw,4rem)] leading-none tracking-[-3px]">Discover & Bid on <br/>Unique Antiques.</h1>
+            <p className="mb-8 text-xl text-[#cbd5e1]">The world's premier destination for rare collectibles and historical pieces.</p>
+            <div>
+              <a href="#explore" className="rounded bg-black px-8 py-4 font-semibold no-underline text-white transition hover:bg-[#333]">Explore Market</a>
+              <Link to="/register" className="ml-4 rounded border border-black px-8 py-4 font-semibold no-underline text-black">Start Selling</Link>
             </div>
           </div>
         </div>
       </header>
 
-      <main id="explore" className="market-section">
-        <div className="section-header">
-          <h2>Latest Opportunities</h2>
-          <div className="filter-hint">Updated just now</div>
+      <main id="explore" className="mx-auto max-w-[1300px] px-8 py-20">
+        <div className="mb-12 flex items-end justify-between">
+          <h2 className="m-0 text-[2rem] tracking-[-1px]">Latest Opportunities</h2>
+          <div className="text-sm text-[#666]">Updated just now</div>
         </div>
 
         {loading ? (
-          <div className="loading-state">Curating collection...</div>
+          <div className="text-base text-[#cbd5e1]">Curating collection...</div>
         ) : auctions.length === 0 ? (
-          <div className="empty-state">No active auctions at the moment.</div>
+          <div className="text-base text-[#666]">No active auctions at the moment.</div>
         ) : (
-          <div className="market-grid">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-12">
             {auctions.map((item) => (
-              <Link to={`/auction/${item._id}`} key={item._id} className="auction-card">
-                <div className="card-media">
+              <Link to={`/auction/${item._id}`} key={item._id} className="text-inherit no-underline">
+                <div className="group relative aspect-square overflow-hidden border border-[#49698e] bg-[#2C3D73]">
                   <img 
                     src={item.image ? `http://localhost:5000${item.image}` : '/placeholder.jpg'} 
                     alt={item.title} 
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
-                  <div className="time-left">Ending Soon</div>
+                  <div className="absolute bottom-4 left-4 bg-[#FFD372] px-3 py-1 text-xs font-bold uppercase text-[#2C3D73]">Ending Soon</div>
                 </div>
-                <div className="card-body">
-                  <span className="seller-name">@{item.owner?.username || 'Curator'}</span>
-                  <h3>{item.title}</h3>
-                  <div className="card-footer">
-                    <div className="price-tag">
-                      <label>Current Bid</label>
-                      <span className="amount">${item.currentBid.toLocaleString()}</span>
+                <div className="px-0 py-6">
+                  <span className="text-xs font-semibold uppercase text-[#999]">@{item.owner?.username || 'Curator'}</span>
+                  <h3 className="my-2 mb-6 text-xl">{item.title}</h3>
+                  <div className="flex items-end justify-between border-t border-[#e5e7eb] pt-4">
+                    <div>
+                      <label className="block text-[0.7rem] uppercase text-[#888]">Current Bid</label>
+                      <span className="text-[1.4rem] font-extrabold">${item.currentBid.toLocaleString()}</span>
                     </div>
-                    <div className="bid-action">View Item</div>
+                    <div className="text-sm font-bold underline underline-offset-4">View Item</div>
                   </div>
                 </div>
               </Link>
@@ -89,40 +89,40 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="home-footer">
-  <div className="footer-container">
-    <div className="footer-brand-section">
-      <Link to="/" className="brand-logo footer-logo">AUCTION<span>X</span></Link>
-      <p className="footer-tagline">
+      <footer className="mt-[100px] bg-[#0a0a0a] px-0 pb-10 pt-20 text-white">
+  <div className="mx-auto grid max-w-[1300px] grid-cols-1 gap-16 px-8 md:grid-cols-[1fr_2fr]">
+    <div>
+      <Link to="/" className="mb-6 block text-2xl font-black text-white no-underline">AUCTION<span className="text-[#888]">X</span></Link>
+      <p className="max-w-[300px] text-[0.95rem] leading-6 text-[#888] md:max-w-none">
         The premier destination for discovering and bidding on extraordinary items.
       </p>
     </div>
 
-    <div className="footer-links-grid">
-      <div className="footer-column">
-        <h4>Marketplace</h4>
-        <Link to="/">Explore Auctions</Link>
-        <Link to="/register">Become a Seller</Link>
-        <Link to="/login">Buyer Protection</Link>
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div>
+        <h4 className="mb-6 text-xs uppercase tracking-[2px] text-white">Marketplace</h4>
+        <Link to="/" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Explore Auctions</Link>
+        <Link to="/register" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Become a Seller</Link>
+        <Link to="/login" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Buyer Protection</Link>
       </div>
 
-      <div className="footer-column">
-        <h4>Support</h4>
-        <Link to="/">Help Center</Link>
-        <Link to="/">Terms of Service</Link>
-        <Link to="/">Privacy Policy</Link>
+      <div>
+        <h4 className="mb-6 text-xs uppercase tracking-[2px] text-white">Support</h4>
+        <Link to="/" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Help Center</Link>
+        <Link to="/" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Terms of Service</Link>
+        <Link to="/" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Privacy Policy</Link>
       </div>
 
-      <div className="footer-column">
-        <h4>Connect</h4>
-        <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://twitter.com" target="_blank" rel="noreferrer">Twitter</a>
+      <div>
+        <h4 className="mb-6 text-xs uppercase tracking-[2px] text-white">Connect</h4>
+        <a href="https://instagram.com" target="_blank" rel="noreferrer" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Instagram</a>
+        <a href="https://twitter.com" target="_blank" rel="noreferrer" className="mb-3 block text-sm text-[#888] no-underline transition hover:text-white">Twitter</a>
       </div>
     </div>
   </div>
   
-  <div className="footer-bottom">
-    <p>&copy; 2026 AUCTIONX. Designed for the Extraordinary.</p>
+  <div className="mx-auto mt-16 flex max-w-[1300px] justify-center border-t border-[#222] px-8 pt-8">
+    <p className="text-xs uppercase tracking-[1px] text-[#555]">&copy; 2026 AUCTIONX. Designed for the Extraordinary.</p>
   </div>
 </footer>
     </div>

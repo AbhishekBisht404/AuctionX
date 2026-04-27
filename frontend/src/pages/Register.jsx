@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Register.css';
 import api from '../services/api';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -67,27 +66,27 @@ export default function Register() {
   };
 
   return (
-    <main className="register-page" >
-      <div className="register-page__container">
-        <section className="register-page__card">
-          <header className="register-page__header">
-            <h1 id="register-heading" className="register-page__title">
+    <main className="flex min-h-screen items-center justify-center bg-[#37477a] p-6 text-white max-[480px]:items-stretch max-[480px]:p-4">
+      <div className="mx-auto w-full max-w-md">
+        <section className="rounded-xl border-2 border-[#7CA8DC] bg-[rgba(44,61,115,0.95)] p-8 shadow-[0_4px_24px_rgba(0,0,0,0.25)]">
+          <header className="mb-7 text-center">
+            <h1 id="register-heading" className="mb-1 text-2xl font-semibold text-[#FFD372] max-[480px]:text-xl">
               Create account
             </h1>
-            <p className="register-page__subtitle">
+            <p className="m-0 text-[15px] text-[#7CA8DC]">
               Sign up with your chosen role to get started.
             </p>
           </header>
 
           <form
-            className="register-form"
+            className="flex flex-col gap-5"
             onSubmit={handleSubmit}
             noValidate
           >
             {error && (
               <div
                 id="register-error"
-                className="register-form__message register-form__message--error"
+                className="mb-1 rounded-lg border-2 border-[#F15B42] bg-[rgba(241,91,66,0.2)] px-4 py-3 text-sm text-white"
                
                 
               >
@@ -95,15 +94,15 @@ export default function Register() {
               </div>
             )}
 
-            <div className="register-form__group">
-              <label htmlFor="register-name" className="register-form__label register-form__label--required">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="register-name" className="text-sm font-medium text-[#FFD372] after:text-[#F15B42] after:content-['_*']">
                 Full name
               </label>
               <input
                 id="register-name"
                 type="text"
                 name="name"
-                className="register-form__input"
+                className="w-full rounded-lg border-2 border-[#7CA8DC] bg-[rgba(255,255,255,0.95)] px-3.5 py-2.5 pr-10 text-base text-[#2C3D73] placeholder:text-[#5a6a8a] focus:border-[#FFD372] focus:outline-none focus:ring-4 focus:ring-[rgba(255,211,114,0.3)]"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your name"
@@ -114,15 +113,15 @@ export default function Register() {
               />
             </div>
 
-            <div className="register-form__group">
-              <label htmlFor="register-email" className="register-form__label register-form__label--required">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="register-email" className="text-sm font-medium text-[#FFD372] after:text-[#F15B42] after:content-['_*']">
                 Email
               </label>
               <input
                 id="register-email"
                 type="email"
                 name="email"
-                className="register-form__input"
+                className="w-full rounded-lg border-2 border-[#7CA8DC] bg-[rgba(255,255,255,0.95)] px-3.5 py-2.5 pr-10 text-base text-[#2C3D73] placeholder:text-[#5a6a8a] focus:border-[#FFD372] focus:outline-none focus:ring-4 focus:ring-[rgba(255,211,114,0.3)]"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="you@example.com"
@@ -133,16 +132,16 @@ export default function Register() {
               />
             </div>
 
-            <div className="register-form__group">
-              <label htmlFor="register-password" className="register-form__label register-form__label--required">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="register-password" className="text-sm font-medium text-[#FFD372] after:text-[#F15B42] after:content-['_*']">
                 Password
               </label>
-              <div className="input-container">
+              <div className="relative">
                 <input
                   id="register-password"
                   type={showPassword ? 'text' : 'password'}
                   name="password"
-                  className="register-form__input"
+                  className="w-full rounded-lg border-2 border-[#7CA8DC] bg-[rgba(255,255,255,0.95)] px-3.5 py-2.5 pr-10 text-base text-[#2C3D73] placeholder:text-[#5a6a8a] focus:border-[#FFD372] focus:outline-none focus:ring-4 focus:ring-[rgba(255,211,114,0.3)]"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="At least 6 characters"
@@ -154,7 +153,7 @@ export default function Register() {
                 />
                 <button
                   type="button"
-                  className="password-toggle"
+                  className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center !border-none !bg-transparent p-0 !text-black"
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   disabled={isSubmitting}
@@ -164,16 +163,16 @@ export default function Register() {
               </div>
             </div>
 
-            <div className="register-form__group">
-              <label htmlFor="register-confirmPassword" className="register-form__label register-form__label--required">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="register-confirmPassword" className="text-sm  font-medium text-[#FFD372] after:text-[#F15B42] after:content-['_*']">
                 Confirm password
               </label>
-              <div className="input-container">
+              <div className="relative">
                 <input
                   id="register-confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
-                  className="register-form__input"
+                  className="w-full rounded-lg border-2 border-[#7CA8DC] bg-[rgba(255,255,255,0.95)] px-3.5 py-2.5 pr-10 text-base text-[#2C3D73] placeholder:text-[#5a6a8a] focus:border-[#FFD372] focus:outline-none focus:ring-4 focus:ring-[rgba(255,211,114,0.3)]"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Repeat password"
@@ -184,7 +183,7 @@ export default function Register() {
                 />
                 <button
                   type="button"
-                  className="password-toggle"
+                  className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center !border-none !bg-transparent p-0 !text-black"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                   disabled={isSubmitting}
@@ -194,14 +193,19 @@ export default function Register() {
               </div>
             </div>
 
-            <fieldset className="register-form__group">
-              <legend className="register-form__label">Register as</legend>
-              <div className="register-form__roles" >
+            <fieldset className="flex flex-col gap-1.5">
+              <legend className="text-sm font-medium text-[#FFD372]">Register as</legend>
+              <div className="flex flex-col gap-2" >
                 {ROLES.map((role) => (
                   <label
                     key={role.value}
-                    className={`register-form__role-option ${formData.role === role.value ? 'register-form__role-option--selected' : ''}`}
+                    className={`flex cursor-pointer items-center gap-3 rounded-lg border-2 px-4 py-3 transition max-[480px]:px-3.5 max-[480px]:py-2.5 ${
+                      formData.role === role.value
+                      ? 'border-[#FFD372] bg-[rgba(255,211,114,0.25)]'
+                      : 'border-[#7CA8DC] bg-[rgba(124,170,220,0.15)] hover:border-[#FFD372] hover:bg-[rgba(255,211,114,0.15)]'
+                    }`}
                   >
+                     
                     <input
                       type="radio"
                       name="role"
@@ -211,9 +215,9 @@ export default function Register() {
                       disabled={isSubmitting}
                       aria-describedby={`reg-role-desc-${role.value}`}
                     />
-                    <span>
+                    <span className="text-[15px] text-[#FFD372]">
                       {role.label}
-                      <small id={`reg-role-desc-${role.value}`}>{role.description}</small>
+                      <small id={`reg-role-desc-${role.value}`} className="mt-0.5 block text-xs text-[#7CA8DC]">{role.description}</small>
                     </span>
                   </label>
                 ))}
@@ -222,7 +226,7 @@ export default function Register() {
 
             <button
               type="submit"
-              className="register-form__submit"
+              className="mt-1 rounded-lg border-none bg-[#F15B42] px-5 py-3 text-base font-semibold text-white transition hover:bg-[#d94a32] disabled:cursor-not-allowed disabled:opacity-60"
               disabled={isSubmitting}
               aria-busy={isSubmitting}
             >
@@ -230,9 +234,9 @@ export default function Register() {
             </button>
           </form>
 
-          <footer className="register-page__footer">
-            <p>
-              Already have an account? <Link to="/login">Sign in</Link>
+          <footer className="mt-6 text-center text-[15px] text-[#7CA8DC]">
+            <p className="">
+            Already have an account? <Link to="/login" className="font-medium !text-yellow-500 no-underline hover:!text-pink-300 hover:underline">Sign in</Link>
             </p>
           </footer>
         </section>

@@ -7,21 +7,21 @@
 
 .dashboard-card {
   background: #3d4d80;
-  border: 1px solid var(--color-skyblue);
+  border: 1px solid #7CA8DC;
   border-radius: 4px;
   width: 100%;
 }
 
 .card-header {
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--color-skyblue);
+  border-bottom: 1px solid #7CA8DC;
 }
 
 .card-header h3 {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--color-golden);
+  color: #FFD372;
 }
 
 .clean-list {
@@ -32,12 +32,12 @@
 
 .clean-list li {
   padding: 1.25rem 2rem;
-  border-bottom: 1px solid var(--color-skyblue);
+  border-bottom: 1px solid #7CA8DC;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.95rem;
-  color: var(--color-golden);
+  color: #FFD372;
 }
 
 .clean-list li:last-child {
@@ -54,34 +54,16 @@
 }
 
 .status-badge.won {
-  background: var(--color-orange);
+  background: #F15B42;
   color: #fff;
 }
 
 .state-text {
   padding: 2.5rem;
   text-align: center;
-  color: var(--color-skyblue);
+  color: #7CA8DC;
   font-size: 0.95rem;
   margin: 0;
 }
 
-@media (prefers-color-scheme: light) {
-  .dashboard-card {
-    background: #ffffff;
-    border-color: var(--color-skyblue);
-  }
-  .card-header {
-    border-bottom-color: var(--color-skyblue);
-  }
-  .card-header h3 {
-    color: var(--color-darkblue);
-  }
-  .clean-list li {
-    border-bottom-color: var(--color-skyblue);
-    color: var(--color-darkblue);
-  }
-  .state-text {
-    color: var(--color-skyblue);
-  }
-}
+

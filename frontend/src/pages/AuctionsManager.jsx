@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import api from '../services/api';
-import './AuctionsManager.css';
 import isTokenValid from '../services/tokenvalidity';
 import { useNavigate } from 'react-router-dom';
 
@@ -75,50 +74,50 @@ const AuctionsManager = () => {
   };
 
   return (
-    <div className="auctions-manager-layout">
+    <div className="flex h-screen w-screen overflow-hidden max-[600px]:flex-col">
       <Sidebar />
-      <main className="auctions-manager-main">
+      <main className="flex grow flex-col overflow-x-hidden overflow-y-auto bg-[#2C3D73] text-[#FFD372]">
         <Topbar />
-        <div className="auctions-manager-canvas">
-          <h2>Manage Auctions</h2>
-          <p>View, edit, and manage all platform auctions.</p>
+        <div className="box-border p-10">
+          <h2 className="mb-2 mt-0 text-2xl font-semibold text-[#FFD372]">Manage Auctions</h2>
+          <p className="mb-6 mt-0 text-base leading-[1.6] text-[#7CA8DC]">View, edit, and manage all platform auctions.</p>
 
-          {error && <div className="auctions-manager-error">{error}</div>}
+          {error && <div className="mb-4 rounded border border-[#F15B42] bg-[rgba(241,91,66,0.2)] px-4 py-3 text-[#FFD372]">{error}</div>}
 
           {loading ? (
-            <p className="auctions-manager-loading">Loading auctions...</p>
+            <p className="m-0 text-[#7CA8DC]">Loading auctions...</p>
           ) : auctions.length === 0 ? (
-            <p className="auctions-manager-empty">No auctions found.</p>
+            <p className="m-0 text-[#7CA8DC]">No auctions found.</p>
           ) : (
-            <div className="auctions-manager-table-wrap">
-              <table className="auctions-manager-table">
+            <div className="w-full overflow-x-auto">
+              <table className="w-full border-collapse">
                 <thead>
                   <tr>
-                    <th>Title</th>
-                    <th>Owner</th>
-                    <th>Current Bid</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th className="border-b border-[#7CA8DC] p-4 text-left text-sm font-semibold text-[#FFD372]">Title</th>
+                    <th className="border-b border-[#7CA8DC] p-4 text-left text-sm font-semibold text-[#FFD372]">Owner</th>
+                    <th className="border-b border-[#7CA8DC] p-4 text-left text-sm font-semibold text-[#FFD372]">Current Bid</th>
+                    <th className="border-b border-[#7CA8DC] p-4 text-left text-sm font-semibold text-[#FFD372]">Status</th>
+                    <th className="border-b border-[#7CA8DC] p-4 text-left text-sm font-semibold text-[#FFD372]">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {auctions.map((auction) => (
                     <tr key={auction._id}>
-                      <td>{auction.title}</td>
-                      <td>{auction.owner?.username || '-'}</td>
-                      <td>${auction.currentBid}</td>
-                      <td><span className={`auctions-manager-status auctions-manager-status-${auction.status}`}>{auction.status}</span></td>
-                      <td>
+                      <td className="border-b border-[#7CA8DC] p-4 text-[#7CA8DC]">{auction.title}</td>
+                      <td className="border-b border-[#7CA8DC] p-4 text-[#7CA8DC]">{auction.owner?.username || '-'}</td>
+                      <td className="border-b border-[#7CA8DC] p-4 text-[#7CA8DC]">${auction.currentBid}</td>
+                      <td className="border-b border-[#7CA8DC] p-4 text-[#7CA8DC]"><span className={`inline-block rounded px-2 py-1 text-[0.8rem] capitalize ${auction.status === 'active' ? 'bg-[rgba(255,211,114,0.3)] text-[#2C3D73]' : auction.status === 'ended' ? 'bg-[rgba(124,170,220,0.3)]' : 'bg-[rgba(244,156,196,0.3)]'}`}>{auction.status}</span></td>
+                      <td className="border-b border-[#7CA8DC] p-4 text-[#7CA8DC]">
                         <button
                           type="button"
-                          className="auctions-manager-btn auctions-manager-btn-view"
+                          className="mb-1 mr-2 rounded border-none bg-[#7CA8DC] px-3 py-1.5 text-[0.85rem] font-medium text-[#2C3D73]"
                           onClick={() => openViewDialog(auction._id)}
                         >
                           View auction
                         </button>
                         <button
                           type="button"
-                          className="auctions-manager-btn-remove"
+                          className="rounded border-none bg-[#F15B42] px-3 py-1.5 text-[0.85rem] font-medium text-white"
                           onClick={() => removeAuction(auction._id)}
                         >
                           Remove
@@ -134,46 +133,46 @@ const AuctionsManager = () => {
       </main>
 
       {viewDialogOpen && (
-        <div className="auctions-manager-dialog-overlay" onClick={closeViewDialog}>
-          <div className="auctions-manager-dialog" onClick={(e) => e.stopPropagation()}>
-            <div className="auctions-manager-dialog-header">
-              <h3>Auction Details</h3>
-              <button type="button" className="auctions-manager-dialog-close" onClick={closeViewDialog}>×</button>
+        <div className="fixed inset-0 z-[1000] box-border flex items-center justify-center bg-black/50 p-4" onClick={closeViewDialog}>
+          <div className="flex max-h-[90vh] w-full max-w-[480px] flex-col rounded-lg border-2 border-[#7CA8DC] bg-[#3d4d80] shadow-[0_8px_32px_rgba(0,0,0,0.3)]" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b border-[#7CA8DC] px-5 py-4">
+              <h3 className="m-0 text-[1.1rem] text-[#FFD372]">Auction Details</h3>
+              <button type="button" className="cursor-pointer border-none bg-transparent px-1 text-2xl leading-none text-[#7CA8DC]" onClick={closeViewDialog}>×</button>
             </div>
-            <div className="auctions-manager-dialog-body">
+            <div className="min-h-0 flex-1 overflow-y-auto p-5">
               {viewDialogLoading ? (
-                <p className="auctions-manager-dialog-loading">Loading...</p>
+                <p className="m-0 text-[#7CA8DC]">Loading...</p>
               ) : viewDialogAuction ? (
-                <div className="auctions-manager-dialog-content">
+                <div className="text-[#7CA8DC]">
                   {viewDialogAuction.image && (
-                    <div className="auctions-manager-dialog-image">
-                      <img src={`http://localhost:5000${viewDialogAuction.image}`} alt={viewDialogAuction.title} />
+                    <div className="mb-4 overflow-hidden rounded-lg">
+                      <img src={`http://localhost:5000${viewDialogAuction.image}`} alt={viewDialogAuction.title} className="block max-h-[200px] w-full object-cover" />
                     </div>
                   )}
-                  <dl className="auctions-manager-dialog-dl">
-                    <dt>Title</dt>
-                    <dd>{viewDialogAuction.title}</dd>
-                    <dt>Description</dt>
-                    <dd>{viewDialogAuction.description || '-'}</dd>
-                    <dt>Owner</dt>
-                    <dd>{viewDialogAuction.owner?.username || '-'} ({viewDialogAuction.owner?.email || '-'})</dd>
-                    <dt>Starting Price</dt>
-                    <dd>${viewDialogAuction.startingPrice}</dd>
-                    <dt>Current Bid</dt>
-                    <dd>${viewDialogAuction.currentBid}</dd>
-                    <dt>Min Increment</dt>
-                    <dd>${viewDialogAuction.minIncrement || 1}</dd>
-                    <dt>Status</dt>
-                    <dd><span className={`auctions-manager-status auctions-manager-status-${viewDialogAuction.status}`}>{viewDialogAuction.status}</span></dd>
-                    <dt>Start Time</dt>
-                    <dd>{formatDate(viewDialogAuction.startTime)}</dd>
-                    <dt>End Time</dt>
-                    <dd>{formatDate(viewDialogAuction.endTime)}</dd>
+                  <dl className="mb-4">
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372] first:mt-0">Title</dt>
+                    <dd className="mt-1 text-[0.95rem]">{viewDialogAuction.title}</dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">Description</dt>
+                    <dd className="mt-1 text-[0.95rem]">{viewDialogAuction.description || '-'}</dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">Owner</dt>
+                    <dd className="mt-1 text-[0.95rem]">{viewDialogAuction.owner?.username || '-'} ({viewDialogAuction.owner?.email || '-'})</dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">Starting Price</dt>
+                    <dd className="mt-1 text-[0.95rem]">${viewDialogAuction.startingPrice}</dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">Current Bid</dt>
+                    <dd className="mt-1 text-[0.95rem]">${viewDialogAuction.currentBid}</dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">Min Increment</dt>
+                    <dd className="mt-1 text-[0.95rem]">${viewDialogAuction.minIncrement || 1}</dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">Status</dt>
+                    <dd className="mt-1 text-[0.95rem]"><span className={`inline-block rounded px-2 py-1 text-[0.8rem] capitalize ${viewDialogAuction.status === 'active' ? 'bg-[rgba(255,211,114,0.3)] text-[#2C3D73]' : viewDialogAuction.status === 'ended' ? 'bg-[rgba(124,170,220,0.3)]' : 'bg-[rgba(244,156,196,0.3)]'}`}>{viewDialogAuction.status}</span></dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">Start Time</dt>
+                    <dd className="mt-1 text-[0.95rem]">{formatDate(viewDialogAuction.startTime)}</dd>
+                    <dt className="mt-3 text-[0.85rem] font-semibold text-[#FFD372]">End Time</dt>
+                    <dd className="mt-1 text-[0.95rem]">{formatDate(viewDialogAuction.endTime)}</dd>
                   </dl>
-                  <div className="auctions-manager-dialog-actions">
+                  <div className="mt-4 border-t border-[rgba(124,170,220,0.3)] pt-4">
                     <button
                       type="button"
-                      className="auctions-manager-btn-remove"
+                      className="rounded border-none bg-[#F15B42] px-3 py-1.5 text-[0.85rem] font-medium text-white"
                       onClick={() => removeAuction(viewDialogAuction._id)}
                     >
                       Remove auction
@@ -181,7 +180,7 @@ const AuctionsManager = () => {
                   </div>
                 </div>
               ) : (
-                <p className="auctions-manager-dialog-empty">Could not load auction.</p>
+                <p className="m-0 text-[#7CA8DC]">Could not load auction.</p>
               )}
             </div>
           </div>

@@ -10,7 +10,7 @@
   width: 100vw;
   overflow: hidden;
   box-sizing:border-box;
- 
+  background-color: #37477a;
 }
 
 .dashboard-main {
@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  background-color: var(--color-darkblue);
-  color: var(--color-golden);
+  background-color: #2C3D73;
+  color: #FFD372;
 }
 
 .dashboard-canvas {
@@ -34,15 +34,7 @@
   justify-content: center;
   min-height: 100vh;
   font-size: 1rem;
-  color: var(--color-skyblue);
+  color: #7CA8DC;
 }
 
-@media (prefers-color-scheme: light) {
-  .dashboard-main {
-    background-color: #f0f4fc;
-    color: var(--color-darkblue);
-  }
-  .dashboard-loading {
-    color: var(--color-skyblue);
-  }
-}
+
