@@ -38,3 +38,17 @@
 }
 
 
+/* Add a temporary glow when the price changes */
+.big-price {
+  transition: color 0.3s ease;
+}
+
+.price-update-glow {
+  animation: price-flash 1s ease;
+}
+
+@keyframes price-flash {
+  0% { color: #FFD372; }
+  50% { color: #ffffff; text-shadow: 0 0 10px #FFD372; }
+  100% { color: #FFD372; }
+}

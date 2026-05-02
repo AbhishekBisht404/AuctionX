@@ -123,9 +123,7 @@ exports.placeBid = async (req, res) => {
     const auctionId = req.params.id;
 
     if (req.user.role === 'seller') {
-      return res.status(403).json({ 
-        message: "Access Denied: Seller accounts are not permitted to place bids." 
-      });
+      return res.status(403).json({ message: "Access Denied: Seller accounts are not permitted to place bids." });
     }
 
     const auction = await Auction.findById(auctionId);
@@ -134,16 +132,12 @@ exports.placeBid = async (req, res) => {
     }
 
     if (auction.owner.toString() === req.user.id) {
-      return res.status(400).json({ 
-        message: "Restriction: You cannot place a bid on your own listing." 
-      });
+      return res.status(400).json({ message: "Restriction: You cannot place a bid on your own listing." });
     }
 
     const minimumRequired = auction.currentBid + auction.minIncrement;
     if (Number(amount) < minimumRequired) {
-      return res.status(400).json({ 
-        message: `Bid too low. The minimum acceptable bid is $${minimumRequired}.` 
-      });
+      return res.status(400).json({ message: `Bid too low. The minimum acceptable bid is $${minimumRequired}.` });
     }
 
     auction.currentBid = Number(amount);
@@ -157,15 +151,22 @@ exports.placeBid = async (req, res) => {
 
     await Promise.all([auction.save(), newBid.save()]);
 
-    console.log(`New high bid of $${amount} placed on ${auction.title}`);
+    // --- LIVE BIDDING BROADCAST ---
+    const io = req.app.get('socketio'); // Get io from server.js
     
+    io.to(auctionId).emit('bidUpdated', {
+      auctionId: auctionId,
+      newPrice: auction.currentBid,
+      bidder: req.user.id
+    });
+    // ------------------------------
+
     res.status(200).json({ 
       message: "Success! You are currently the highest bidder.", 
       currentBid: auction.currentBid 
     });
 
   } catch (error) {
-    console.error("Bidding Error:", error.message);
     res.status(500).json({ message: "Server error processing bid.", error: error.message });
   }
 };

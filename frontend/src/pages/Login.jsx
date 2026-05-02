@@ -49,7 +49,9 @@ export default function Login() {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('role', res.data.role);
       localStorage.setItem('username', res.data.username);
-      
+      localStorage.setItem('userId', res.data.userId);
+    
+      console.log('Login successful, userId stored:', res.data.userId);
       console.log('Login successful, token stored:');
       navigate('/dashboard');
     } catch (err) {
