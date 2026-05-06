@@ -100,7 +100,7 @@ export default function BidderDashboard() {
                   </td>
                   <td>${item.currentBid}</td>
                   <td><span className="status-badge active">PAID / WON</span></td>
-                  <td><button className="secondary-btn">Contact Seller</button></td>
+                  <td><button className="secondary-btn">Pay Now</button></td>
                 </tr>
               ))}
             </tbody>

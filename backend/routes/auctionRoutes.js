@@ -22,8 +22,10 @@ router.get('/my-listings', verifyToken, getMyListings);
 router.get('/won', verifyToken, getWonAuctions);
 router.get('/all', getAllAuctions);
 router.get('/admin/all', verifyToken, authorizeRoles('admin'), getAllAuctionsAdmin);
-router.delete('/admin/:id', verifyToken, authorizeRoles('admin'), deleteAuction);
+router.get('/joined', verifyToken, getJoinedAuctions);
 router.post('/:id/bid', verifyToken, placeBid);
 router.get('/:id', getAuctionById);
-router.get('/joined', verifyToken, getJoinedAuctions);
+
+router.delete('/admin/:id', verifyToken, authorizeRoles('admin'), deleteAuction);
+
 module.exports = router;

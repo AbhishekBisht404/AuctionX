@@ -50,21 +50,34 @@ return;
             <p className="state-text">Loading...</p>
           ) : (
             <div className="market-grid">
-              {auctions.map((item) => (
-                <Link to={`/auction/${item._id}`} key={item._id} className="item-card">
-                  <div className="item-image-wrapper">
-                    <img src={item.image ? `http://localhost:5000${item.image}` : '/placeholder.jpg'} alt={item.title} />
-                  </div>
-                  <div className="item-info">
-                    <span className="item-seller">By {item.owner?.username}</span>
-                    <h3 className="item-title">{item.title}</h3>
-                    <div className="item-footer">
-                      <span className="price-amount">${item.currentBid}</span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+  {auctions.length > 0 ? (
+
+    auctions.map((item) => (
+      <Link to={`/auction/${item._id}`} key={item._id} className="item-card">
+        <div className="item-image-wrapper">
+          <img 
+            src={item.image ? `http://localhost:5000${item.image}` : '/placeholder.jpg'} 
+            alt={item.title} 
+          />
+        </div>
+        <div className="item-info">
+          <span className="item-seller">By {item.owner?.username}</span>
+          <h3 className="item-title">{item.title}</h3>
+          <div className="item-footer">
+            <span className="price-amount">${item.currentBid}</span>
+          </div>
+        </div>
+      </Link>
+    ))
+  ) : (
+
+    <div className="empty-market-state">
+      <div className="empty-icon">🏛️</div>
+      <h3>No Live Auctions</h3>
+      <p>There are no items currently up for bidding. Please check back later!</p>
+    </div>
+  )}
+</div>
           )}
         </div>
       </main>
