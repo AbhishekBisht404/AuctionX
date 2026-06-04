@@ -53,7 +53,7 @@ export default function BidderDashboard() {
               {joinedAuctions.map((item) => (
                 <tr key={item._id}>
                   <td className="p-4 border-b border-blue-300 align-middle flex items-center gap-4">
-                    <img src={item.image ? `http://localhost:5000${item.image}` : '/placeholder.jpg'} alt="" className="w-12 h-12 object-cover rounded border border-blue-300" />
+                    <img src={item.image ? `https://auctionx-guan.onrender.com${item.image}` : '/placeholder.jpg'} alt="" className="w-12 h-12 object-cover rounded border border-blue-300" />
                     <span>{item.title}</span>
                   </td>
                   <td className="p-4 border-b border-blue-300 align-middle">${item.currentBid}</td>
@@ -95,7 +95,7 @@ export default function BidderDashboard() {
               {wonAuctions.map((item) => (
                 <tr key={item._id}>
                   <td className="p-4 border-b border-blue-300 align-middle flex items-center gap-4">
-                    <img src={`http://localhost:5000${item.image}`} alt="" className="w-12 h-12 object-cover rounded border border-blue-300" />
+                    <img src={`https://auctionx-guan.onrender.com${item.image}`} alt="" className="w-12 h-12 object-cover rounded border border-blue-300" />
                     <span>{item.title}</span>
                   </td>
                   <td className="p-4 border-b border-blue-300 align-middle">${item.currentBid}</td>

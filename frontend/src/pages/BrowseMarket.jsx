@@ -57,7 +57,7 @@ return;
                     <div className="bg-blue-900 border border-blue-600 rounded-lg overflow-hidden hover:border-yellow-300 transition-colors group cursor-pointer">
                       <div className="w-full h-40 sm:h-48 overflow-hidden bg-blue-800">
                         <img 
-                          src={item.image ? `http://localhost:5000${item.image}` : '/placeholder.jpg'} 
+                          src={item.image ? `https://auctionx-guan.onrender.com${item.image}` : '/placeholder.jpg'} 
                           alt={item.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />

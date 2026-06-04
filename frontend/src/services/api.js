@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // backend URL
+  baseURL: 'https://auctionx-guan.onrender.com/api', // backend URL
 });
 // token ko header m attach krne k liye 
 api.interceptors.request.use((config) => {

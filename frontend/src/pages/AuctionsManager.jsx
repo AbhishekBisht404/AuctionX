@@ -147,7 +147,7 @@ const AuctionsManager = () => {
                 <div className="text-[#7CA8DC]">
                   {viewDialogAuction.image && (
                     <div className="mb-4 overflow-hidden rounded-lg">
-                      <img src={`http://localhost:5000${viewDialogAuction.image}`} alt={viewDialogAuction.title} className="block max-h-[200px] w-full object-cover" />
+                      <img src={`https://auctionx-guan.onrender.com${viewDialogAuction.image}`} alt={viewDialogAuction.title} className="block max-h-[200px] w-full object-cover" />
                     </div>
                   )}
                   <dl className="mb-4">

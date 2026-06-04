@@ -6,7 +6,7 @@ import Topbar from './Topbar';
 import { io } from 'socket.io-client';
 import CountdownTimer from './CountdownTimer';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://auctionx-guan.onrender.com');
 
 export default function AuctionDetail() {
   const { id } = useParams();
@@ -137,7 +137,7 @@ export default function AuctionDetail() {
             <div className="flex flex-col gap-8">
               <div className="relative w-full overflow-hidden rounded-lg border border-[#7CA8DC] bg-[rgba(124,170,220,0.12)]">
                 <img 
-                  src={auction.image ? `http://localhost:5000${auction.image}` : '/placeholder.jpg'} 
+                  src={auction.image ? `https://auctionx-guan.onrender.com${auction.image}` : '/placeholder.jpg'} 
                   alt={auction.title} 
                   className="block h-[450px] w-full object-cover"
                 />

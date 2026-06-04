@@ -66,7 +66,7 @@ export default function Home() {
               <Link to={`/auction/${item._id}`} key={item._id} className="text-inherit no-underline">
                 <div className="group relative aspect-square overflow-hidden border border-[#49698e] bg-[#2C3D73]">
                   <img 
-                    src={item.image ? `http://localhost:5000${item.image}` : '/placeholder.jpg'} 
+                    src={item.image ? `https://auctionx-guan.onrender.com${item.image}` : '/placeholder.jpg'} 
                     alt={item.title} 
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
