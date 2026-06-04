@@ -5,6 +5,7 @@ import Topbar from './Topbar';
 import api from '../services/api';
 
 const ManageUsers = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -107,10 +108,10 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden max-[600px]:flex-col">
-      <Sidebar />
-      <main className="flex grow flex-col overflow-x-hidden overflow-y-auto bg-[#2C3D73] text-[#FFD372]">
-        <Topbar />
+    <div className="flex h-screen w-screen overflow-hidden">
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <main className="flex min-w-0 grow flex-col overflow-x-hidden overflow-y-auto bg-[#2C3D73] text-[#FFD372]">
+        <Topbar onMenuClick={() => setSidebarOpen((o) => !o)} />
         <div className="box-border p-10">
           <h2 className="mb-2 mt-0 text-2xl font-semibold text-[#FFD372]">Manage Users</h2>
           <p className="mb-6 mt-0 text-base leading-[1.6] text-[#7CA8DC]">View and manage user accounts and roles.</p>

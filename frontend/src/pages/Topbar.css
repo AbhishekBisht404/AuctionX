@@ -1,7 +1,7 @@
 .dashboard-topbar {
-  height: 65px;
+  height: 79px;
   background-color: #3d4d80;
-  border-bottom: 1px solid #7CA8DC;
+  border-bottom: 2px solid #7CA8DC;
   display: flex;
   justify-content: space-between;
   align-items: center;

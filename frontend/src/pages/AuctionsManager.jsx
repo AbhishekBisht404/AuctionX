@@ -6,6 +6,7 @@ import isTokenValid from '../services/tokenvalidity';
 import { useNavigate } from 'react-router-dom';
 
 const AuctionsManager = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
     useEffect(() => {
       if (!isTokenValid()) {
@@ -74,10 +75,10 @@ const AuctionsManager = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden max-[600px]:flex-col">
-      <Sidebar />
-      <main className="flex grow flex-col overflow-x-hidden overflow-y-auto bg-[#2C3D73] text-[#FFD372]">
-        <Topbar />
+    <div className="flex h-screen w-screen overflow-hidden">
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <main className="flex min-w-0 grow flex-col overflow-x-hidden overflow-y-auto bg-[#2C3D73] text-[#FFD372]">
+        <Topbar onMenuClick={() => setSidebarOpen((o) => !o)} />
         <div className="box-border p-10">
           <h2 className="mb-2 mt-0 text-2xl font-semibold text-[#FFD372]">Manage Auctions</h2>
           <p className="mb-6 mt-0 text-base leading-[1.6] text-[#7CA8DC]">View, edit, and manage all platform auctions.</p>

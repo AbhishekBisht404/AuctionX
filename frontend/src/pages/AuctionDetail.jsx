@@ -19,6 +19,7 @@ export default function AuctionDetail() {
   const [bidAmount, setBidAmount] = useState('');
   const [isGlowing, setIsGlowing] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -114,7 +115,7 @@ export default function AuctionDetail() {
 
   return (
     <div className={token ? "flex min-h-screen w-screen overflow-hidden" : "block w-full"}>
-      {token ? <Sidebar /> : (
+      {token ? <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> : (
         <nav className="sticky top-0 z-[1000] flex h-20 w-full items-center border-b border-[#49698e] bg-[#2C3D73]">
           <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-8 text-white">
             <Link to="/" className="text-2xl font-black no-underline text-white">AUCTION<span className="text-[#888]">X</span></Link>
@@ -126,8 +127,8 @@ export default function AuctionDetail() {
         </nav>
       )}
 
-      <main className={token ? "flex flex-1 flex-col bg-[#2C3D73] text-[#FFD372]" : "flex w-full flex-col bg-[#37477a] text-white"}>
-        {token && <Topbar title="Auction View" />}
+      <main className={token ? "flex min-w-0 flex-1 flex-col bg-[#2C3D73] text-[#FFD372]" : "flex w-full flex-col bg-[#37477a] text-white"}>
+        {token && <Topbar onMenuClick={() => setSidebarOpen((o) => !o)} />}
 
         <div className={token ? "w-full p-10 max-md:p-5" : "mx-auto w-full max-w-[1200px] px-8 py-16"}>
           <div className="grid grid-cols-1 items-start gap-12 min-[901px]:grid-cols-2">
